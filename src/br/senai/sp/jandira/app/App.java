@@ -1,31 +1,68 @@
 package br.senai.sp.jandira.app;
 
+//IMPORTADO AS CLASSES PARA O PASSO A PASSO DA CLASSE
+import br.senai.sp.jandira.lista.TipoConta;
+import br.senai.sp.jandira.model.Agencia;
+import br.senai.sp.jandira.model.Cliente;
 import br.senai.sp.jandira.model.Conta;
 
+//CRIADO A CLASSE: APP 
 public class App {
 
+	//MÉTODO PARA GERAR O PROGRAMA 
 	public static void main(String[] args) {
+		
+		//Criar uma Agencia
+		Agencia agencia = new Agencia();
+		agencia.setCidade("Jandira");
+		agencia.setGerente("Celso");
+		agencia.setNumero("4214-9");
+		agencia.setTelefone("(11) 95687-4531");
+	
+		//Criar o cliente Maria
+		Cliente clienteMaria = new Cliente();
+		clienteMaria.setNome("Maria Antonieta");
+		clienteMaria.setEmail("maria@terra.com.br");
+		clienteMaria.setSalario(2000);
 		
 		// Criação da conta da Maria
 		Conta contaMaria = new Conta("7845-8");
-		contaMaria.titular = "Maria Antonieta";
-		contaMaria.numeroAgencia = "4214-9";
+		contaMaria.setTitular(clienteMaria);
+		contaMaria.setAgencia(agencia);
 		contaMaria.depositar(500); 
-		contaMaria.tipo = "Corrente";
+		contaMaria.setTipo(TipoConta.CORRENTE); 
+		
+		System.out.println("===>" + contaMaria.getTipo());
+		
+		//Criar o cliente Pedro
+		Cliente clientePedro = new Cliente();
+		clientePedro.setNome("Pedro Cabral");
+		clientePedro.setEmail("pedro@ig.com.br");
+		clientePedro.setSalario(1500);
 		
 		// Criação da conta do Pedro
 		Conta contaPedro = new Conta("6547-6");
-		contaPedro.titular = "Pedro Cabral";
+		contaPedro.setTitular(clientePedro);
 		contaPedro.depositar(400);
-		contaPedro.tipo = "Poupança";
-		contaPedro.numeroAgencia = "4214-9";
+		contaPedro.setTipo(TipoConta.POUPANCA);
+		contaPedro.setAgencia(agencia);
+		
+		System.out.println("===>" + contaPedro.getTipo());
+		
+		//Criar o cliente Ana
+		Cliente clienteAna = new Cliente();
+		clienteAna.setNome("Ana Gomes");
+		clienteAna.setEmail("Anagomes@gmail.com");
+		clienteAna.setSalario(3000);
 		
 		// Criação da conta da Ana
 		Conta contaAna = new Conta("23145-9");
-		contaAna.titular = "Ana Gomes";
+		contaAna.setTitular(clienteAna); 
 		contaAna.depositar(2000);
-		contaAna.tipo = "Corrente";
-		contaAna.numeroAgencia = "4214-9";
+		contaAna.setTipo(TipoConta.SALARIO); 
+		contaAna.setAgencia(agencia);
+		
+		System.out.println("===>" + contaAna.getTipo());
 			
 		// Exibir os detalhes das contas
 		contaMaria.exibirDetalhes();
@@ -51,9 +88,6 @@ public class App {
 		
 		//Transferir 100 reais da conta do Pedro 
 		//para a Maria
-		
-		
-		
 		contaPedro.transferir(contaMaria, 1000);
 		contaPedro.exibirDetalhes();
 		contaMaria.exibirDetalhes();
